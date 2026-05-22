@@ -1,54 +1,45 @@
-# 🌌 Eyrae Reminders
+# 🌌 Wisp 2.0
 
-A high-fidelity, fluid, glassmorphic productivity ecosystem built for creators, artists, and developers who refuse to look at boring checklists. Engineered with **React Native** and **Expo**, stylized with deep neon aesthetics, and driven by micro-interactions.
+*Your local-first, aesthetic second brain.*
+
+Wisp is the evolution of a productivity ecosystem. It began as **Eyrae Reminders**—a high-fidelity, glassmorphic checklist built for creators who were tired of boring, generic interfaces.
+
+After months of deep-work engineering, it has transformed into **Wisp**: a professional-grade OS for your tasks, code, and commissions. Designed for developers and digital artists, Wisp brings your workflow into a fluid, distraction-free environment that lives entirely on your device. Your data stays with you—100% private, 100% performant.
+
+We finally have an official icon to the app too:
+
+<img width="325" height="325" alt="wizard" src="https://github.com/user-attachments/assets/67cfa355-7661-4608-bf9c-dbf99a84103f" />
+
+What does our icon says: The imperfection we hold in our life but still we use our magic wand and live the life! 
 
 ---
 
-## ✨ Features at a Glance
+## 🚀 The Evolution: From V1 to Wisp
 
-### 🚀 Fluid Swipe-to-Complete
+In V1, we mastered the **Physics of Productivity**—fluid swipe-to-complete gestures, haptic feedback, and distraction-free Pomodoro focus sessions.
 
-* **The Physics:** Powered by `react-native-gesture-handler` and `reanimated`. Cards smoothly slide open to reveal a glowing green checkmark.
-* **The Feedback:** Snaps cleanly with a satisfying haptic thump (`expo-haptics`) as completed items effortlessly drop into the archive list.
+In **Wisp 2.0**, we’ve supercharged the engine for "Second Brain" utility:
 
-### 🎯 Zen Focus Mode
-
-* **The Workflow:** Tap the crosshair on any task to initiate a fullscreen, distraction-free **25-minute Pomodoro protocol**.
-* **The Vibe:** Minimalist, high-contrast countdown timers leveraging a specialized system font (`fontVariant: ['tabular-nums']`) to keep ticking numbers perfectly locked in place without awkward shifting.
-
-### ⏳ Live Event Countdowns
-
-* **The Priority:** Got a critical launch, client commission deadline, or tournament match? Toggle the **Pin as Countdown** switch.
-* **The UI:** Anchors the item directly to the absolute top of your dashboard as a massive, standalone panel featuring real-time "Days/Hours Left" calculations.
-
-### 🏷️ Persistent Custom Tag System
-
-* **The Engine:** Create custom tags seamlessly inside the entry drawer.
-* **The Layout:** Pill-based horizontal scrolling allows you to group tasks, display bright aesthetic tags, and organize your agenda at a single glance.
+* **Markdown Workspace:** Don't just list tasks—write them. Full Markdown support lets you format code snippets, checklists, and documentation directly inside your tasks.
+* **Hourly Scoping Engine:** Every task now features an integrated live stopwatch. Perfect for tracking freelance billable hours or mapping out your server-side maintenance.
+* **Global Knowledge Search:** A lightning-fast search engine that queries tasks, code, and custom tags across your entire local database.
+* **Identity & Aesthetics:** Upload your own custom character art as your avatar, set your display name, and choose from 14+ curated pastel themes to match your mood.
+* **Data Sovereignty:** Your data, your rules. The new JSON Import/Export engine lets you back up your entire Wisp state to a file and port it between devices whenever you want.
 
 ---
 
 ## 🎨 The Aesthetic Palettes (Vibes)
 
-Your workflow shouldn’t be a generic default. The entire interface shifts gracefully to adapt to your style:
-
-| Vibe | Vibe ID | Primary Accent | Vibe Vibe |
-| --- | --- | --- | --- |
-| 🔮 **Midnight** | `midnight` | Velvet Purple | Deep space developer mode. |
-| 🩵 **Cyber** | `cyber` | Electric Cyan | Neon grid glowing lines. |
-| 🌿 **Forest** | `forest` | Matrix Green | Low-key, earthy focus zone. |
-| 🌸 **Blossom** | `blossom` | Pastel Pink | High-contrast, soft aesthetic. |
-| 🍵 **Mint** | `mint` | Pastel Green | Clean, icy text highlights. |
-| 🍇 **Lavender** | `lavender` | Pastel Purple | Smooth, calming evening setup. |
+Why settle for a default interface? Wisp adapts to your creative style with a massive grid of soft-glow themes, including our new 2026 palette: *Mocha, Vanilla, Sakura, Flamingo, Minty, Sea Foam, Pearl, Glacier, Sky, and Denim.*
 
 ---
 
-## 🛠️ The Architecture (Tech Stack)
+## 🛠️ The Architecture
 
 ```
         ┌────────────────────────────────────────────────────────┐
         │                     React Native                       │
-        │             (Cross-Platform UI Engine)                  │
+        │             (Cross-Platform UI Engine)                 │
         └───────────────────────────┬────────────────────────────┘
                                     ▼
         ┌────────────────────────────────────────────────────────┐
@@ -68,45 +59,40 @@ Your workflow shouldn’t be a generic default. The entire interface shifts grac
 
 ```
 
-* **State Management:** State orchestration via `Zustand`. Fast, highly lightweight reactive arrays.
-* **Data Persistence:** Hard-wired directly to the physical storage engine via `@react-native-async-storage/async-storage`. If the app process is terminated, your todo cache, chosen pastel themes, and custom tag arrays remain structurally preserved.
-* **Notifications:** Uses local system handles (`expo-notifications`) to silently pre-schedule alarms 1 hour before an assignment's deadline.
+* **State Orchestration:** Lightning-fast reactive state via `Zustand`.
+* **Data Integrity:** Fully encrypted-ready local storage via `AsyncStorage` + `JSON Backup/Restore`.
+* **UI/UX:** Physics-driven interactions powered by `Reanimated 3` and `Gesture Handler`.
+* **Content:** Rich-text rendering powered by `react-native-markdown-display`.
 
 ---
 
 ## 📁 Repository Structure
 
 ```hl
-eyrae-reminders/
-├── app/                  # Expo Router directory (File-based navigation)
-│   ├── (tabs)/           # Core application bottom bar layout
-│   │   ├── index.tsx     # Home dashboard (Countdowns, list splits)
-│   │   └── settings.tsx  # Theme selections & global state controller
-│   └── focus.tsx         # Fullscreen Zen focus route with scale physics
+wisp/
+├── app/                  # Expo Router (File-based navigation)
+│   ├── (tabs)/           # Dashboard, Settings, Data Management
+│   └── focus.tsx         # Fullscreen Zen Pomodoro Protocol
+├── assets/               # Custom animations & Wizard iconography
 └── src/
     ├── components/
-    │   └── core/
-    │       ├── GlassSheet.tsx    # Bottom modal entry sheet (Android-padding fixed)
-    │       ├── SwipeableCard.tsx # Reanimated gesture controller 
-    │       └── NeoCard.tsx       # Translucent UI panels
+    │   └── core/         # Glassmorphic UI components & Markdown Engine
     └── store/
-        ├── useTaskStore.ts   # Main task store (Persisted state)
-        └── useThemeStore.ts  # Theme matrix config file
+        ├── useTaskStore.ts   # Task logic & Time Tracker engine
+        └── useThemeStore.ts  # Theme matrix & Profile config
 
 ```
 
 ---
 
-## ⚡ Setup for Local Devs
-
-If you want to clone this code and spin it up inside your terminal:
+## ⚡ Quick Start
 
 ```bash
 # 1. Clone the project
-git clone https://github.com/Eyraee/eyrae-reminders.git
+git clone https://github.com/Eyraee/wisp.git
 
 # 2. Enter directory & install packages
-cd eyrae-reminders
+cd wisp
 npm install
 
 # 3. Initialize Expo server (Clearing config cache)
@@ -116,6 +102,8 @@ npx expo start -c
 
 ---
 
-### 💡 Portfolio Note
+## 💡 Portfolio Note
 
-> This application runs **entirely locally**. It requests zero analytics permissions, tracking cookies, or database endpoints. It was engineered intentionally as a premium, secure tool optimized for high-performance mobile architectures.
+> Wisp runs **entirely locally**. It requests zero analytics permissions, tracking cookies, or database endpoints. It was engineered intentionally as a premium, secure tool optimized for high-performance mobile architectures.
+
+---
